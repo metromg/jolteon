@@ -2,10 +2,26 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+
 import { api } from "~/utils/api";
 
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const codeString = `
+    <main>
+      <SyntaxHighlighter
+        language="javascript"
+        className="container"
+        style={atomDark}
+        showLineNumbers={true}
+        wrapLongLines={true}
+      >
+        {codeString}
+      </SyntaxHighlighter>
+    </main>
+    `;
 
   return (
     <>
@@ -47,6 +63,15 @@ const Home: NextPage = () => {
             {hello.data ? hello.data.greeting : "Loading tRPC query..."}
           </p>
         </div>
+        <SyntaxHighlighter
+          language="tsx"
+          className="container"
+          style={atomDark}
+          showLineNumbers={true}
+          wrapLongLines={true}
+        >
+          {codeString}
+        </SyntaxHighlighter>
       </main>
     </>
   );
