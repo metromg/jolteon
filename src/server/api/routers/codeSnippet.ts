@@ -5,7 +5,7 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 // TODO: Error handling
 export const codeSnippetRouter = createTRPCRouter({
   create: publicProcedure
-    .input(z.object({ content: z.string().max(4096) }))
+    .input(z.object({ content: z.string().min(1).max(4096) }))
     .mutation(({ input, ctx }) => {
       return ctx.prisma.codeSnippet.create({
         data: input,
