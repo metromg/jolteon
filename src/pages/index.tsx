@@ -1,9 +1,11 @@
+import { Transition } from "@headlessui/react";
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Error from "~/components/common/error";
 import Layout from "~/components/common/layout";
 import Form, { type CodeSnippetFormData } from "~/components/form";
+import Snippet from "~/components/snippet";
 import { api } from "~/utils/api";
 
 const Home: NextPage = () => {
@@ -17,10 +19,9 @@ const Home: NextPage = () => {
     return <Error />;
   }
 
-  // TODO: Styling, Preview
   return (
     <Layout>
-      <div className="flex flex-col items-stretch justify-center gap-4">
+      <div className="flex w-full flex-col items-stretch justify-start gap-4">
         <Form
           data={formData}
           onChange={(data) => setFormData(data)}
@@ -34,7 +35,18 @@ const Home: NextPage = () => {
           }
           isSubmitting={createCodeSnippet.isLoading}
         />
-        <p className="text-white">Preview TODO</p>
+        <Transition
+          show={!!formData.content}
+          enter="transition-opacity duration-1000"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+        >
+          <Snippet
+            content={formData.content}
+            theme="a11yDark"
+            language="javascript"
+          />
+        </Transition>
       </div>
     </Layout>
   );

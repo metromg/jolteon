@@ -4,6 +4,7 @@ import Layout from "~/components/common/layout";
 import Loading from "~/components/common/loading";
 import Error from "~/components/common/error";
 import { api } from "~/utils/api";
+import Snippet from "~/components/snippet";
 
 const Detail: NextPage = () => {
   const { query } = useRouter();
@@ -23,10 +24,15 @@ const Detail: NextPage = () => {
     return <Error />;
   }
 
-  // TODO: Styling, Syntax Highlighting
   return (
     <Layout>
-      <p className="text-white">{data.content}</p>
+      <div className="flex w-full flex-col justify-center">
+        <Snippet
+          content={data.content}
+          theme="a11yDark"
+          language="javascript"
+        />
+      </div>
     </Layout>
   );
 };

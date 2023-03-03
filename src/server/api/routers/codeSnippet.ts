@@ -2,7 +2,6 @@ import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
-// TODO: Error handling
 export const codeSnippetRouter = createTRPCRouter({
   create: publicProcedure
     .input(z.object({ content: z.string().min(1).max(4096) }))
