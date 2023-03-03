@@ -4,7 +4,7 @@ import Layout from "./layout";
 const Error: React.FC = () => {
   return (
     <Layout>
-      <div className="flex flex-col items-center gap-3">
+      <div className="flex w-full flex-col items-center justify-center gap-3">
         <FaceFrownIcon className="h-10 w-10 text-white" />
         <p className="text-xl text-white">Something went wrong...</p>
       </div>

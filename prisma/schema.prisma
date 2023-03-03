@@ -13,6 +13,8 @@ datasource db {
 model CodeSnippet {
     id        String   @id @default(cuid())
     content   String
+    theme     String
+    language  String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }

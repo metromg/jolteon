@@ -5,6 +5,7 @@ import Loading from "~/components/common/loading";
 import Error from "~/components/common/error";
 import { api } from "~/utils/api";
 import Snippet from "~/components/snippet";
+import { type Theme } from "~/types/theme";
 
 const Detail: NextPage = () => {
   const { query } = useRouter();
@@ -29,8 +30,8 @@ const Detail: NextPage = () => {
       <div className="flex w-full flex-col justify-center">
         <Snippet
           content={data.content}
-          theme="a11yDark"
-          language="javascript"
+          theme={data.theme as Theme}
+          language={data.language}
         />
       </div>
     </Layout>

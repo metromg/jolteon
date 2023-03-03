@@ -11,6 +11,8 @@ import { api } from "~/utils/api";
 const Home: NextPage = () => {
   const [formData, setFormData] = useState<CodeSnippetFormData>({
     content: "",
+    theme: "a11yDark",
+    language: "typescript",
   });
   const createCodeSnippet = api.codeSnippet.create.useMutation();
   const router = useRouter();
@@ -43,8 +45,8 @@ const Home: NextPage = () => {
         >
           <Snippet
             content={formData.content}
-            theme="a11yDark"
-            language="javascript"
+            theme={formData.theme}
+            language={formData.language}
           />
         </Transition>
       </div>
