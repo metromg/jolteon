@@ -1,24 +1,26 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
-import { z } from "zod";
-import Layout from "~/components/layout";
+import Layout from "~/components/common/layout";
+import Loading from "~/components/common/loading";
+import Error from "~/components/common/error";
 import { api } from "~/utils/api";
 
 const Detail: NextPage = () => {
-  const router = useRouter();
-  const id = z.string().safeParse(router.query.id);
+  const { query } = useRouter();
 
-  const { isLoading, isError, data } = api.codeSnippet.get.useQuery({
-    id: id.success ? id.data : "",
-  });
+  const { isLoading, isError, data } = api.codeSnippet.get.useQuery(
+    {
+      id: query.id as string,
+    },
+    { enabled: !!query.id }
+  );
 
-  // TODO: Propper loading and error states
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   if (isError || !data) {
-    return <p>Error!</p>;
+    return <Error />;
   }
 
   // TODO: Styling, Syntax Highlighting
